@@ -1,0 +1,96 @@
+{{ define "main" }}
+<div>
+  <main>
+    <a
+      href="https://github.com/joseflekardal/joseflekardal.github.io/commit/{{ .GitInfo.Hash }}"
+      target="_blank"
+      >{{ .GitInfo.AbbreviatedHash }} @ {{ .GitInfo.CommitDate.Format
+      "2006-01-02" }}</a
+    >
+    <h1>{{ .Title }}</h1>
+
+    <div>{{- .Content -}}</div>
+    <div id="app">
+      <details>
+        <summary>Settings ⚙️</summary>
+
+        <form id="settings">
+          <fieldset>
+            <h3>What notes should play before the secrets?</h3>
+            <label>
+              <input type="radio" name="preroll" value="all" checked /> All
+              (easiest)
+            </label>
+            <label>
+              <input type="radio" name="preroll" value="root" /> Root (medium)
+            </label>
+            <label>
+              <input type="radio" name="preroll" value="none" /> None (hard)
+            </label>
+          </fieldset>
+          <fieldset>
+            <h3>What kind of secrets?</h3>
+            <label>
+              <input type="radio" name="secret" value="singles" checked />
+              Single notes
+            </label>
+            <label>
+              <input type="radio" name="secret" value="chords" /> Chords
+            </label>
+          </fieldset>
+
+          <fieldset>
+            <h3>How many secrets?</h3>
+            <label>
+              <input type="number" name="secretNotes" value="1" min="1" />
+            </label>
+          </fieldset>
+
+          <fieldset>
+            <h3 id="bpm">Speed (120 bpm)</h3>
+            <label>
+              <input type="range" name="bpm" value="120" min="60" max="320" />
+            </label>
+          </fieldset>
+        </form>
+      </details>
+
+      <button id="start">Start ▶︎</button>
+      <button id="root">Root 🔈</button>
+
+      <div>
+        <p>Score: <span id="score">0</span></p>
+      </div>
+
+      <hr />
+
+      <div id="note-wrapper">
+        <h3>Single notes:</h3>
+        <div>
+          <button data-note="C4">1</button>
+          <button data-note="D4">2</button>
+          <button data-note="E4">3</button>
+          <button data-note="F4">4</button>
+          <button data-note="G4">5</button>
+          <button data-note="A4">6</button>
+          <button data-note="B4">7</button>
+          <button data-note="C5">8</button>
+        </div>
+
+        <h3>Chords:</h3>
+        <div>
+          <button data-note="C">I</button>
+          <button data-note="Dm7">II-7</button>
+          <button data-note="Em7">III-7</button>
+          <button data-note="F">IV</button>
+          <button data-note="G">V</button>
+          <button data-note="Am7">VI-7</button>
+          <button data-note="G/B">V/III</button>
+        </div>
+      </div>
+
+      <div id="secrets"></div>
+    </div>
+  </main>
+</div>
+{{ end }}

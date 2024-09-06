@@ -1,0 +1,21 @@
+{{- define "main" -}}
+<main class="start-page">
+  <div class="content">{{ .Content }}</div>
+
+  <ul class="post-list">
+    {{- $pag := .Paginate (where .Site.RegularPages "Type" "in"
+    .Site.MainSections) -}} {{- range $pag.Pages -}}
+    <li>
+        {{ .Date.Format "2006-01-02" }} | {{ range .Params.categories }}
+          <a href="/categories/{{ . | urlize }}">{{ . }}</a>
+        {{ end }}
+
+      <a href="{{ .RelPermalink }}">
+        <h2>{{ .LinkTitle }}</h2>
+        {{ .Summary }}
+      </a>
+    </li>
+    {{- end -}}
+  </ul>
+</main>
+{{- end -}}
